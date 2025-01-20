@@ -24,13 +24,27 @@ document.addEventListener("DOMContentLoaded", () => { //This event listner will 
         ball.style.left = (`${ballX}px`);
         ball.style.top = (`${ballY}px`);
 
+        /**
+         * Adding ball and paddle collision logic.
+         * ballX < paddle.offsetLeft + paddle.offsetWidth -> if left (w.r.t table) of ball < right (w.r.t table) of paddle.
+         * ballY > paddle.offsetTop -> if top (w.r.t table) of ball > top (w.r.t table) of paddle.
+         * ballY - ball.offsetHeight < paddle.offsetTop + paddle.offsetHeight -> 
+         */
+
+        if(ballX < paddle.offsetLeft + paddle.offsetWidth &&
+            ballY > paddle.offsetTop &&
+            ballY + ball.offsetHeight < paddle.offsetTop + paddle.offsetHeight
+        ) {
+            dx *= -1; //Change the direction if hit the paddle
+        }
+
         // if(ballX > 680 || ballX <= 0)     dx *= -1; //If the ballX value is greater than 500px value then change the direction. Or infact if the ball goes less than 0 then too we need to change the direction. And in the table width we to need to subtract our ball width.
         // if(ballY > 380 || ballY <= 0)     dy *= -1; //If the ballY value is greater than 400px value then change the direction. Or infact if the ball goes less than 0 then too we need to change the direction. And in the table height we to need to subtract our ball height.
 
         if(ballX > table.offsetWidth - ball.offsetWidth || ballX <=0)  dx *= -1; 
         if(ballY > table.offsetHeight - ball.offsetHeight || ballY <=0)  dy *= -1;
         //ballX and ballY shows the moment of the ball if it goes out of the table or box need to change direction.
-    }, 4);
+    }, 5);
 
     let paddleY = 0;
     let dPy = 5; //displacement of paddle in y-direction, +5 -> paddle goes down as paddle is initially at top, -5 -> paddle goes up.
