@@ -58,4 +58,13 @@ document.addEventListener("DOMContentLoaded", () => { //This event listner will 
         }
         paddle.style.top = (`${paddleY}px`);
     });
+
+    document.addEventListener("mousemove", (event) => {
+        let mouseDistTop = event.clientY; //This is the distance of the mouse pointer from the top of the browser window.
+        let tableDistTop = table.offsetTop;
+        let mousePointCtrl = mouseDistTop - tableDistTop - paddle.offsetHeight/2;
+        paddleY = mousePointCtrl;
+        if(paddleY <= 0 || paddle > table.offsetHeight - paddle.offsetHeight)   return; //If bottom of the paddle touches the bottom of the table then do nothing and return.
+        paddle.style.top = (`${paddleY}px`);
+    });
 }); 
