@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => { //This event listner will 
         // if(ballX > 680 || ballX <= 0)     dx *= -1; //If the ballX value is greater than 500px value then change the direction. Or infact if the ball goes less than 0 then too we need to change the direction. And in the table width we to need to subtract our ball width.
         // if(ballY > 380 || ballY <= 0)     dy *= -1; //If the ballY value is greater than 400px value then change the direction. Or infact if the ball goes less than 0 then too we need to change the direction. And in the table height we to need to subtract our ball height.
 
-        if(ballX > table.offsetWidth - ball.offsetWidth || ballX <=0)  dx *= -1; 
-        if(ballY > table.offsetHeight - ball.offsetHeight || ballY <=0)  dy *= -1;
+        if(ballX > table.offsetWidth - ball.offsetWidth || ballX <= 0)  dx *= -1; 
+        if(ballY > table.offsetHeight - ball.offsetHeight || ballY <= 0)  dy *= -1;
         //ballX and ballY shows the moment of the ball if it goes out of the table or box need to change direction.
     }, 5);
 
@@ -60,11 +60,12 @@ document.addEventListener("DOMContentLoaded", () => { //This event listner will 
     });
 
     document.addEventListener("mousemove", (event) => {
+        if(event.clientX > table.offsetLeft + (table.offsetWidth/2)) return;
         let mouseDistTop = event.clientY; //This is the distance of the mouse pointer from the top of the browser window.
         let tableDistTop = table.offsetTop;
         let mousePointCtrl = mouseDistTop - tableDistTop - paddle.offsetHeight/2;
         paddleY = mousePointCtrl;
-        if(paddleY <= 0 || paddle > table.offsetHeight - paddle.offsetHeight)   return; //If bottom of the paddle touches the bottom of the table then do nothing and return.
+        if(paddleY <= 0 || paddleY > table.offsetHeight - paddle.offsetHeight)   return; //If bottom of the paddle touches the bottom of the table then do nothing and return.
         paddle.style.top = (`${paddleY}px`);
     });
 }); 
