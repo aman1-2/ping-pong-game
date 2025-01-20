@@ -36,13 +36,12 @@ document.addEventListener("DOMContentLoaded", () => { //This event listner will 
     let dPy = 5; //displacement of paddle in y-direction, +5 -> paddle goes down as paddle is initially at top, -5 -> paddle goes up.
     //Add a event listener to our document that at anytime keydown is pressed anywhere in the document.
     document.addEventListener("keydown", (event) => {
-
+        event.preventDefault(); //This will prevent the default behaviour of the even to happen and our logic will be only applicable from now onwards.
         if(event.keyCode == 38 && paddleY > 0) { //This shows that up-arraow key is pressed. 
             paddleY += dPy*(-1);
         } else if(event.keyCode == 40 && paddleY < table.offsetHeight - paddle.offsetHeight) { //This shows that up-arraow key is pressed.
             paddleY += dPy;
         }
-
         paddle.style.top = (`${paddleY}px`);
     });
 }); 
