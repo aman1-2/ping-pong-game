@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => { //This event listner will 
     //Here we can add our game logic.
     let ball = document.getElementById("ping-pong-ball"); //Targetting the ball element.
     let table = document.getElementById("ping-pong-table");
+    let paddle = document.getElementById("ping-pong-paddle");
 
     //Here the ballxand bally are helping us to set a starting point of the ball w.r.t table
     let ballX = 10; //coordinate of the top of the ball w.r.t top of the table
@@ -30,4 +31,18 @@ document.addEventListener("DOMContentLoaded", () => { //This event listner will 
         if(ballY > table.offsetHeight - ball.offsetHeight || ballY <=0)  dy *= -1;
         //ballX and ballY shows the moment of the ball if it goes out of the table or box need to change direction.
     }, 4);
+
+    let paddleY = 0;
+    let dPy = 5; //displacement of paddle in y-direction, +5 -> paddle goes down as paddle is initially at top, -5 -> paddle goes up.
+    //Add a event listener to our document that at anytime keydown is pressed anywhere in the document.
+    document.addEventListener("keydown", (event) => {
+
+        if(event.keyCode == 38 && paddleY > 0) { //This shows that up-arraow key is pressed. 
+            paddleY += dPy*(-1);
+        } else if(event.keyCode == 40 && paddleY < table.offsetHeight - paddle.offsetHeight) { //This shows that up-arraow key is pressed.
+            paddleY += dPy;
+        }
+
+        paddle.style.top = (`${paddleY}px`);
+    });
 }); 
